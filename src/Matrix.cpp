@@ -1,6 +1,6 @@
 //Matrix.cpp
 #include "Matrix.h"
-#include "Utils.h"
+
 namespace ofxRPiWS281x{
 
 	Matrix::Matrix()
@@ -39,12 +39,27 @@ namespace ofxRPiWS281x{
         }
 		ws2811_fini(&ledstring);
 	}
+	void Matrix::draw(){
+		for(int y = 0 ; y < getHeight() ;y++)
+		{
+			for(int x = 0 ; x < getWidth() ;x++)
+			{
+				ofRect();
+			}
+		}
+	}
 	// void setupStrip(int numPixes){};
 	// void setupGrid(){};
-
 	void Matrix::drawMatrix(int x, int y ,ofColor color){
 		drawPiexls( remapIndex(x, y), color);		
 	}
+	int Matrix::getWidth(){
+		return ledWidth;
+	}
+	int Matrix::getHeight(){
+		return ledHeight;
+	}
+
 	int Matrix::getMatrixWidth(){
 		return matrixWidth;
 	}

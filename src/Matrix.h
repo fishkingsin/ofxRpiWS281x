@@ -24,15 +24,18 @@ namespace ofxRPiWS281x{
 			, int _matrixColum 
 			, int _matrixRow );
 		~Matrix();
+		void draw();
 		// void setupStrip(int numPixes){};
 		// void setupGrid(){};
 		
 		void drawMatrix(int x, int y ,ofColor color);
+		int getWidth();
+		int getHeight();
 		int getMatrixWidth();
 		int getMatrixHeight();
 		int getMatrixColum();
 		int getMatrixRow();
-
+	
 	private:
 		int remapIndex(int x, int y);
 		int matrixHeight;

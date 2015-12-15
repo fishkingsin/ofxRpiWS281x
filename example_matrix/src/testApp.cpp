@@ -5,13 +5,26 @@ static int inputX,inputY;
 using namespace ofxRPiWS281x;
 void testApp::setup()
 {
-	ofSetLogLevel(OF_LOG_VERBOSE);
+	// ofSetLogLevel(OF_LOG_VERBOSE);
 	ofLogVerbose("ledMatrix init");
 	ledMatrix = new ofxRPiWS281x::Matrix();
 	ledMatrix->setupMatrix(8, 8, 4, 1);
-	for (int y = 0; y < ledMatrix->getMatrixWidth(); y++)
+	
+	
+	
+}
+void testApp::exit()
+{
+	ledMatrix->~Matrix();
+}
+
+
+//--------------------------------------------------------------
+void testApp::update()
+{
+	for (int y = 0; y < ledMatrix->getHeight(); y++)
 	{
-		for (int x = 0; x < ledMatrix->getMatrixHeight(); x++)
+		for (int x = 0; x < ledMatrix->getWidth(); x++)
 		{
 			if(x==inputX && y==inputY)
 			{
@@ -25,11 +38,11 @@ void testApp::setup()
 	}
 	i++;
 	inputX++;
-	if(inputX>ledMatrix->getMatrixWidth()-1)
+	if(inputX>ledMatrix->getWidth()-1)
 	{
 		inputY++;
 		inputX = 0;
-		if(inputY>ledMatrix->getMatrixHeight()-1)
+		if(inputY>ledMatrix->getHeight()-1)
 		{
 			inputY = 0;
 		}
@@ -37,22 +50,11 @@ void testApp::setup()
 
 	ledMatrix->update();
 }
-void testApp::exit()
-{
-	ledMatrix->~Matrix();
-}
-
-
-//--------------------------------------------------------------
-void testApp::update()
-{
-	
-}
 
 
 //--------------------------------------------------------------
 void testApp::draw(){
-
+	ledMatrix->update();
 }	
 
 

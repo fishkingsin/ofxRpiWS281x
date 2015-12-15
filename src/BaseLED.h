@@ -1,7 +1,7 @@
 //BaseLED.h
 #ifdef __cplusplus
 #include "ofMain.h"
-#include "Utils.h"
+
 extern "C" {
 
 #include <stdint.h>
@@ -31,6 +31,13 @@ extern "C" {
 
 #define TARGET_FREQ                              WS2811_TARGET_FREQ
 	namespace ofxRPiWS281x{
+		class Utils{
+		public:
+			static ws2811_led_t Color(int red, int green, int blue);
+
+			static ws2811_led_t wheel(int pos) ;
+			
+		};
 		class BaseLED{
 		public:
 			BaseLED();
@@ -39,6 +46,7 @@ extern "C" {
 			
 			void drawPiexls(int i ,ofColor color);
 			void update();
+			virtual void draw(){};
 		protected:
 			
 			ws2811_t ledstring;
