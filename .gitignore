@@ -30,3 +30,12 @@
 
 # Debug files
 *.dSYM/
+._.DS_Store
+*.d
+src/._BaseLED.cpp
+src/._BaseLED.h
+src/._Matrix.cpp
+src/._Matrix.h
+src/._ofxRPiWS281x.h
+src/._Utils.cpp
+src/._Utils.h
