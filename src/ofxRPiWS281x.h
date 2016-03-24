@@ -1,3 +1,3 @@
-//ofxRPiWS281x.h
-
+//ofxRpiWS281x.h
+// #include "BaseLED.h"
 #include "Matrix.h"

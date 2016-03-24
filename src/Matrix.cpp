@@ -1,7 +1,7 @@
 //Matrix.cpp
 #include "Matrix.h"
 
-namespace ofxRPiWS281x{
+namespace ofxRpiWS281x{
 
 	Matrix::Matrix()
 	{
@@ -44,7 +44,7 @@ namespace ofxRPiWS281x{
 		{
 			for(int x = 0 ; x < getWidth() ;x++)
 			{
-				ofRect();
+				ofRect(0,0,getWidth(),getHeight());
 			}
 		}
 	}

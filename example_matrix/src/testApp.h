@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxRPiWS281x.h"
+#include "ofxRpiWS281x.h"
 
 class testApp : public ofBaseApp{
 
@@ -11,6 +11,6 @@ class testApp : public ofBaseApp{
 		void update();
 		void draw();
 		void exit();
-		ofxRPiWS281x::Matrix *ledMatrix;
+		ofxRpiWS281x::Matrix *ledMatrix;
 };
 

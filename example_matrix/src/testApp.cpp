@@ -2,12 +2,12 @@
 static int i = 0;
 static int inputX,inputY;
 //--------------------------------------------------------------
-using namespace ofxRPiWS281x;
+using namespace ofxRpiWS281x;
 void testApp::setup()
 {
 	// ofSetLogLevel(OF_LOG_VERBOSE);
 	ofLogVerbose("ledMatrix init");
-	ledMatrix = new ofxRPiWS281x::Matrix();
+	ledMatrix = new ofxRpiWS281x::Matrix();
 	ledMatrix->setupMatrix(8, 8, 4, 1);
 	
 	

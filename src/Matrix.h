@@ -15,7 +15,7 @@
 #define HEIGHT                                   (MATRIX_W*MATRIX_ROW)
 #define LED_COUNT                                (WIDTH * HEIGHT)
 using namespace std;
-namespace ofxRPiWS281x{
+namespace ofxRpiWS281x{
 	class Matrix : public BaseLED{
 	public:
 		Matrix();

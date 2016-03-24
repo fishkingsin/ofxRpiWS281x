@@ -2,7 +2,7 @@
 #include "BaseLED.h"
 #ifdef __cplusplus
 extern "C" {
-	namespace ofxRPiWS281x{
+	namespace ofxRpiWS281x{
 		ws2811_led_t Utils::Color(int red, int green, int blue){
 			return (red << 16) | (green << 8) | blue ;
 		}

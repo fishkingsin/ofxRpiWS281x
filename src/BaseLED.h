@@ -30,7 +30,7 @@ extern "C" {
 #define DMA                                      5
 
 #define TARGET_FREQ                              WS2811_TARGET_FREQ
-	namespace ofxRPiWS281x{
+	namespace ofxRpiWS281x{
 		class Utils{
 		public:
 			static ws2811_led_t Color(int red, int green, int blue);
