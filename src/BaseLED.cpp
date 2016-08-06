@@ -43,10 +43,10 @@ extern "C" {
 		    ledstring.channel[1].brightness = 0;
 
 
-		    if (board_info_init() < 0)
-		    {
-		        std::exit(-1);
-		    }
+		    // if (board_info_init() < 0)
+		    // {
+		    //     std::exit(-1);
+		    // }
 
 		    
 

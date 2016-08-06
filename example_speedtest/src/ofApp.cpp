@@ -1,5 +1,6 @@
 #include "ofApp.h"
 using namespace ofxRpiWS281x;
+int step = 0;
 ofColor wheel(int pos){
 	
 	if (pos < 85){
@@ -19,8 +20,27 @@ ofColor wheel(int pos){
 void ofApp::setup(){
 	led = new ofxRpiWS281x::BaseLED();
 	led->setup(LED_COUNT, 125);
+	startThread();
+}
+void ofApp::threadedFunction(){
+	while(isThreadRunning()){
+		if(lock()){
+			for(int i = 0 ; i < LED_COUNT ; i++){
+				if(step==i){
+					led->drawPiexls(step,ofColor(50,50,50));
+				}else{
+					led->drawPiexls(step,ofColor(0,0,0));
+				}
+			}
+			led->update();
+			step++;
+			step%=LED_COUNT;
+			lock();
+		}
+	}
 }
 void ofApp::exit(){
+	stopThread();
 	for(int i = 0 ; i < LED_COUNT ; i++){
 		led->drawPiexls(i,0);
 	}
@@ -28,10 +48,7 @@ void ofApp::exit(){
 }
 //--------------------------------------------------------------
 void ofApp::update(){
-	for(int i = 0 ; i < LED_COUNT ; i++){
-		led->drawPiexls(i,wheel((i+ofGetFrameNum())%255));
-	}
-	led->update();
+	
 }
 
 //--------------------------------------------------------------

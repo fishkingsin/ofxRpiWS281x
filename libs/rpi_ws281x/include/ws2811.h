@@ -15,7 +15,7 @@
  *         provided with the distribution.
  *     3.  Neither the name of the owner nor the names of its contributors may be used to endorse
  *         or promote products derived from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR
  * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER BE
@@ -31,27 +31,55 @@
 #ifndef __WS2811_H__
 #define __WS2811_H__
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
+#include "rpihw.h"
 #include "pwm.h"
 
 
 #define WS2811_TARGET_FREQ                       800000   // Can go as low as 400000
 
+// 4 color R, G, B and W ordering
+#define SK6812_STRIP_RGBW                        0x18100800
+#define SK6812_STRIP_RBGW                        0x18100008
+#define SK6812_STRIP_GRBW                        0x18081000
+#define SK6812_STRIP_GBRW                        0x18080010
+#define SK6812_STRIP_BRGW                        0x18001008
+#define SK6812_STRIP_BGRW                        0x18000810
+#define SK6812_SHIFT_WMASK                       0xf0000000
+
+// 3 color R, G and B ordering
+#define WS2811_STRIP_RGB                         0x00100800
+#define WS2811_STRIP_RBG                         0x00100008
+#define WS2811_STRIP_GRB                         0x00081000
+#define WS2811_STRIP_GBR                         0x00080010
+#define WS2811_STRIP_BRG                         0x00001008
+#define WS2811_STRIP_BGR                         0x00000810
+
+// predefined fixed LED types
+#define WS2812_STRIP                             WS2811_STRIP_GRB
+#define SK6812_STRIP                             WS2811_STRIP_GRB
+#define SK6812W_STRIP                            SK6812_STRIP_GRBW
+
 struct ws2811_device;
 
-typedef uint32_t ws2811_led_t;                   //< 0x00RRGGBB
+typedef uint32_t ws2811_led_t;                   //< 0xWWRRGGBB
 typedef struct
 {
     int gpionum;                                 //< GPIO Pin with PWM alternate function, 0 if unused
     int invert;                                  //< Invert output signal
     int count;                                   //< Number of LEDs, 0 if channel is unused
     int brightness;                              //< Brightness value between 0 and 255
+    int strip_type;                              //< Strip color layout -- one of WS2811_STRIP_xxx constants
     ws2811_led_t *leds;                          //< LED buffers, allocated by driver based on count
 } ws2811_channel_t;
 
 typedef struct
 {
     struct ws2811_device *device;                //< Private data for driver use
+    const rpi_hw_t *rpi_hw;                      //< RPI Hardware Information
     uint32_t freq;                               //< Required output frequency
     int dmanum;                                  //< DMA number _not_ already in use
     ws2811_channel_t channel[RPI_PWM_CHANNELS];
@@ -63,6 +91,8 @@ void ws2811_fini(ws2811_t *ws2811);              //< Tear it all down
 int ws2811_render(ws2811_t *ws2811);             //< Send LEDs off to hardware
 int ws2811_wait(ws2811_t *ws2811);               //< Wait for DMA completion
 
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __WS2811_H__ */
-
